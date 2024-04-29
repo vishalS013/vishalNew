@@ -8,7 +8,7 @@ function App() {
   
   return (
     <>
-    <div class='bg-gray-600 h-5/6'>
+    <div className='bg-gray-600 h-5/6'>
       <h1>Learn about redux toolkit</h1>
       <AddTodo/>
      <Todos/>
