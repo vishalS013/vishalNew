@@ -1,12 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {removeTodo,updateTodo} from '../features/todo/todoSlice'
+import {removeTodo,editTodo,duplicateTodo} from '../features/todo/todoSlice'
 
-function Todos({setInput}) {
+function Todos() {
     const todos = useSelector(state => state.todos)
     const dispatch = useDispatch()
-    const handleChange = (todo)=>{
-      setInput(todo.text);
+
+    const handleEdit = (todo)=>{
+     dispatch(editTodo(todo.id))
+     console.log("=======>",todo.id);
       
     }
 
@@ -25,7 +27,7 @@ function Todos({setInput}) {
             </div>
             <button
              onClick={() => dispatch(removeTodo(todo.id))}
-              className="text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+              className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,10 +46,17 @@ function Todos({setInput}) {
             </button>
             <button
         type="submit"
-        className="text-white bg-orange-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-        onClick={() => handleChange(todo)}
+        className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
+        onClick={() => handleEdit(todo)}
       >
-        updateTodo
+       Edit
+      </button>
+      <button
+        type="submit"
+        className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
+        onClick={() => dispatch(duplicateTodo(todo.id))}
+      >
+       Duplicate
       </button>
           </li>
         ))}
